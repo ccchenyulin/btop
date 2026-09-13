@@ -55,6 +55,7 @@ add_library(libbtop OBJECT
   src/btop_menu.cpp
   src/btop_shared.cpp
   src/btop_theme.cpp
+  src/btop_locale.cpp
   src/btop_tools.cpp
 )
 

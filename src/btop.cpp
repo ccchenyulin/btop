@@ -64,6 +64,7 @@ tab-size = 4
 #include "btop_config.hpp"
 #include "btop_draw.hpp"
 #include "btop_input.hpp"
+#include "btop_locale.hpp"
 #include "btop_log.hpp"
 #include "btop_menu.hpp"
 #include "btop_shared.hpp"
@@ -933,6 +934,9 @@ static auto configure_tty_mode(std::optional<bool> force_tty) {
 	//? Config init
 	init_config(cli.low_color, cli.filter);
 
+	//? Locale init（简体中文汉化：读取配置里的 lang）
+	Locale::init(Config::getS("lang"));
+
 	//? Try to find and set a UTF-8 locale
 	if (std::setlocale(LC_ALL, "") != nullptr and not std::string_view { std::setlocale(LC_ALL, "") }.contains(";")
 	and str_to_upper(s_replace((string)std::setlocale(LC_ALL, ""), "-", "")).ends_with("UTF8")) {
@@ -1124,6 +1128,7 @@ static auto configure_tty_mode(std::optional<bool> force_tty) {
 				if (Runner::active) Runner::stop();
 				Config::unlock();
 				init_config(cli.low_color, cli.filter);
+				Locale::init(Config::getS("lang"));
 				Theme::updateThemes();
 				Theme::setTheme();
 				Draw::banner_gen(0, 0, false, true);

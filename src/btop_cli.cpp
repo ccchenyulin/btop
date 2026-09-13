@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "btop_cli.hpp"
+#include "btop_locale.hpp"
 
 #include <algorithm>
 #include <expected>
@@ -243,30 +244,30 @@ namespace Cli {
 	}
 
 	void usage() noexcept {
-		fmt::println("{0}Usage:{1} {2}btop{1} [OPTIONS]\n", BOLD_UNDERLINE, RESET, BOLD);
+		fmt::println("{0}用法:{1} {2}btop{1} [选项]\n", BOLD_UNDERLINE, RESET, BOLD);
 	}
 
 	void help() noexcept {
 		fmt::print(
-			"{0}Options:{1}\n"
-			"  {2}-c, --config{1} <file>     Path to a config file\n"
-			"  {2}-d, --debug{1}             Start in debug mode with additional logs and metrics\n"
-			"  {2}-f, --filter{1} <filter>   Set an initial process filter\n"
-			"  {2}    --force-utf{1}         Override automatic UTF locale detection\n"
-			"  {2}-l, --low-color{1}         Disable true color, 256 colors only\n"
-			"  {2}-p, --preset{1} <id>       Start with a preset (0-9)\n"
-			"  {2}-t, --tty{1}               Force tty mode with ANSI graph symbols and 16 colors only\n"
-			"  {2}    --themes-dir{1} <dir>  Path to a custom themes directory\n"
-			"  {2}    --no-tty{1}            Force disable tty mode\n"
-			"  {2}-u, --update{1} <ms>       Set an initial update rate in milliseconds\n"
-			"  {2}    --default-config{1}    Print default config to standard output\n"
-			"  {2}-h, --help{1}              Show this help message and exit\n"
-			"  {2}-V, --version{1}           Show a version message and exit (more with --version)\n",
+			"{0}选项:{1}\n"
+			"  {2}-c, --config{1} <文件>     配置文件路径\n"
+			"  {2}-d, --debug{1}             以调试模式启动，输出额外日志与指标\n"
+			"  {2}-f, --filter{1} <过滤词>   设置初始进程过滤器\n"
+			"  {2}    --force-utf{1}         覆盖自动 UTF locale 检测\n"
+			"  {2}-l, --low-color{1}         禁用真彩色，仅用 256 色\n"
+			"  {2}-p, --preset{1} <编号>     以指定预设启动（0-9）\n"
+			"  {2}-t, --tty{1}               强制 tty 模式，仅用 ANSI 图表符号与 16 色\n"
+			"  {2}    --themes-dir{1} <目录> 自定义主题目录路径\n"
+			"  {2}    --no-tty{1}            强制禁用 tty 模式\n"
+			"  {2}-u, --update{1} <毫秒>     设置初始刷新间隔（毫秒）\n"
+			"  {2}    --default-config{1}    把默认配置输出到标准输出\n"
+			"  {2}-h, --help{1}              显示本帮助并退出\n"
+			"  {2}-V, --version{1}           显示版本并退出（加 --version 显示更多）\n",
 			BOLD_UNDERLINE, RESET, BOLD
 		);
 	}
 
 	void help_hint() noexcept {
-		fmt::println("For more information, try '{}--help{}'", BOLD, RESET);
+		fmt::println("更多信息请尝试 '{}--help{}'", BOLD, RESET);
 	}
 } // namespace Cli

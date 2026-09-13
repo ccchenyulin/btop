@@ -16,6 +16,7 @@ indent = tab
 tab-size = 4
 */
 
+#include "btop_locale.hpp"
 #include "btop_menu.hpp"
 
 #include "btop_config.hpp"
@@ -1685,7 +1686,7 @@ static int optionsMenu(const string& key) {
 				}
 
 				out += Mv::to(cy++, x + 1) + (c-1 == selected ? Theme::c("selected_bg") + Theme::c("selected_fg") : Theme::c("title"))
-					+ Fx::b + cjust(capitalize(s_replace(option, "_", " ")) + idx_str, 29);
+					+ Fx::b + cjust((Locale::has(option) ? Locale::get(option) : capitalize(s_replace(option, "_", " "))) + idx_str, 29, true, true);
 				out	+= Mv::to(cy++, x + 1) + (c-1 == selected ? "" : Theme::c("main_fg")) + Fx::ub + "  "
 					+ (c-1 == selected and editing ? cjust(editor(24), 34, true) : cjust(value, 25, true)) + "  ";
 
@@ -1704,7 +1705,7 @@ static int optionsMenu(const string& key) {
 						if (cyy++ == y+7) continue;
 						else if (cyy == y+10) out += Theme::c("main_fg") + Fx::ub;
 						else if (cyy > y + height + 4) break;
-						out += Mv::to(cyy, x+32) + desc;
+						out += Mv::to(cyy, x+32) + Locale::get(desc);
 					}
 				}
 			}
@@ -1781,10 +1782,10 @@ static int optionsMenu(const string& key) {
 					+ to_string(page+1) + '/' + to_string(pages) + ' ' + Theme::c("hi_fg") + Symbols::down + Fx::ub + Symbols::title_right_down;
 			}
 			auto cy = y+7;
-			out += Mv::to(cy++, x + 1) + Theme::c("title") + Fx::b + cjust("Key:", 20) + "Description:";
+			out += Mv::to(cy++, x + 1) + Theme::c("title") + Fx::b + cjust(Locale::get("Key:"), 20, true, true) + Locale::get("Description:");
 			for (int c = 0, i = max(0, (height - 3) * page); c++ < height - 3 and i < (int)help_text.size(); i++) {
-				out += Mv::to(cy++, x + 1) + Theme::c("hi_fg") + Fx::b + cjust(help_text[i][0], 20)
-					+ Theme::c("main_fg") + Fx::ub + help_text[i][1];
+				out += Mv::to(cy++, x + 1) + Theme::c("hi_fg") + Fx::b + cjust(help_text[i][0], 20, true, true)
+					+ Theme::c("main_fg") + Fx::ub + Locale::get(help_text[i][1]);
 			}
 			out += Fx::reset;
 		}

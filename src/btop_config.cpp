@@ -33,6 +33,7 @@ tab-size = 4
 #include <sys/statvfs.h>
 
 #include "btop_config.hpp"
+#include "btop_locale.hpp"
 #include "btop_log.hpp"
 #include "btop_shared.hpp"
 #include "btop_tools.hpp"
@@ -253,6 +254,9 @@ namespace Config {
 		{"log_level", 			"#* Set loglevel for \"~/.local/state/btop.log\" levels are: \"ERROR\" \"WARNING\" \"INFO\" \"DEBUG\".\n"
 								"#* The level set includes all lower levels, i.e. \"DEBUG\" will show all logging info."},
 		{"save_config_on_exit",  "#* Automatically save current settings to config file on exit."},
+
+		{"lang",				"#* Set language of the interface: \"en\" for English, \"zh\" for Simplified Chinese.\n"
+								"#* 界面语言：\"en\" 英文，\"zh\" 简体中文。"},
 	#ifdef GPU_SUPPORT
 
 		{"nvml_measure_pcie_speeds",
@@ -298,6 +302,7 @@ namespace Config {
 		{"net_iface", ""},
 		{"base_10_bitrate", "Auto"},
 		{"log_level", "WARNING"},
+		{"lang", "zh"},
 		{"proc_filter", ""},
 		{"proc_command", ""},
 		{"selected_name", ""},
@@ -882,7 +887,7 @@ namespace Config {
 			// Write a description comment if available.
 			fmt::format_to(std::back_inserter(buffer), "\n");
 			if (!description.empty()) {
-				fmt::format_to(std::back_inserter(buffer), "{}\n", description);
+				fmt::format_to(std::back_inserter(buffer), "{}\n", Locale::get(description));
 			}
 
 			fmt::format_to(std::back_inserter(buffer), "{} = ", name);
