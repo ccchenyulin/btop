@@ -1,3 +1,27 @@
+> ## ⚠️ 本仓库说明
+>
+> **这是 [aristocratos/btop](https://github.com/aristocratos/btop) 的简体中文汉化版本（个人自用，非官方项目）。**
+>
+> | 项 | 说明 |
+> |---|---|
+> | 上游项目 | https://github.com/aristocratos/btop |
+> | 本仓库性质 | 个人汉化，未向上游提交 PR |
+> | 汉化分支 | `chinese-i18n` |
+> | 汉化方式 | 新建 i18n 层 `src/btop_locale.cpp`（以英文原文为 key 的译文字典，812 条），配置项 `lang` 控制语言（默认 `zh`） |
+> | 汉化范围 | 仅界面文字，未改动任何业务逻辑 |
+> | 原许可证 | 遵循上游 LICENSE（见仓库内 LICENSE 文件） |
+>
+> 上游更新后同步方法：
+> ```bash
+> git fetch upstream
+> git merge upstream/main
+> ```
+>
+> 说明：显示中文处均已传入 `rjust/ljust/cjust(..., utf=true, wide=true)`，
+> 以复用上游 `widechar_wcwidth()` 处理 CJK 双宽字符对齐。
+>
+> ---
+
 # ![btop++](Img/logo.png)
 
 <a href="https://repology.org/project/btop/versions">
