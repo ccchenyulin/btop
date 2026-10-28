@@ -116,7 +116,7 @@ namespace Cli {
 				auto config_file = stdfs::path { arg };
 
 				if (stdfs::is_directory(config_file)) {
-					error("Config file can't be a directory");
+					error(Locale::get("Config file can't be a directory"));
 					return std::unexpected { 1 };
 				}
 

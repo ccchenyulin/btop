@@ -101,7 +101,7 @@ namespace Locale {
 		translations["To change value."] = "更改值。";
 		translations["To change value by 5."] = "每次增减 5。";
 		translations["To set nice value."] = "设定 nice 值。";
-		translations["Renice PID "] = "重设 PID ";
+		translations["Renice PID "] = "调整优先级 PID ";
 		translations["Enter nice value: "] = "输入 nice 值：";
 		translations["Options"] = "选项";
 		translations["Help"] = "帮助";
@@ -209,16 +209,12 @@ namespace Locale {
 		translations["everse"] = "反转";
 		translations["ilter"] = "过滤";
 		translations[" delete "] = " 删除 ";
-		translations[" select "] = " 选择 ";
-		translations["info "] = "信息 ";
 		translations["term"] = "终止";
 		translations["ill"] = "杀死";
 		translations["signal"] = "信号";
 		translations["ice"] = "优先级";
-		translations["pause"] = "暂停";
 		translations["core"] = "核心";
 		translations["reverse"] = "反转";
-		translations["filter"] = "过滤";
 		translations["del"] = "删除";
 		translations["Pid:"] = "PID：";
 		translations["Program:"] = "程序：";
@@ -266,8 +262,6 @@ namespace Locale {
 		translations["VRAM clock:"] = "显存频率：";
 		translations["ENC "] = "编码 ";
 		translations["DEC "] = "解码 ";
-		translations["TX:"] = "发送：";
-		translations["RX:"] = "接收：";
 		translations["Running"] = "运行中";
 		translations["Sleeping"] = "休眠中";
 		translations["Waiting"] = "等待中";
@@ -284,7 +278,6 @@ namespace Locale {
 		translations["°F"] = "°F";
 		translations["K "] = "K ";
 		translations["°R"] = "°R";
-		translations["signals"] = "信号";
 		translations["Send signal to PID "] = "发送信号给 PID ";
 		translations["↑ ↓ ← → | To choose signal."] = "↑ ↓ ← → | 选择信号。";
 		translations["0-9 | Enter manually."] = "0-9 | 手动输入。";
@@ -310,7 +303,6 @@ namespace Locale {
 		translations["ENTER | To set nice value."] = "回车 | 设定 nice 值。";
 		translations["ESC or 'q' | To abort."] = "ESC 或 'q' | 取消。";
 		translations[" page "] = " 页 ";
-		translations["zero"] = "归零";
 		translations["uto"] = "自动";
 		translations["ync"] = "同步";
 		translations["charging"] = "充电中";
@@ -456,7 +448,6 @@ namespace Locale {
 		translations["cpu lazy"] = "CPU 惰性";
 		translations["Zero"] = "归零";
 		translations["Sync"] = "同步";
-		translations["free"] = "空闲";
 		translations["Available"] = "可用";
 		translations["Cached"] = "缓存";
 
@@ -730,7 +721,6 @@ namespace Locale {
 		translations["Should be full path of a mountpoint."] = "应为挂载点的完整路径。";
 		translations["Separate multiple values with"] = "多个值用";
 		translations["Only disks matching the filter will be shown."] = "只显示匹配过滤器的磁盘。";
-		translations["Prepend \\033[3mexclude=\\033[23m to only show disks "] = "前缀 \\033[3mexclude=\\033[23m 可只显示";
 		translations["not matching the filter."] = "不匹配过滤器的磁盘。";
 		translations["Examples:"] = "示例：";
 		translations["/boot /home/user"] = "/boot /home/user";
@@ -823,7 +813,6 @@ namespace Locale {
 
 		// ========== 主界面标签补充 ==========
 		translations["Threads:"] = "线程:";
-		translations["Used:"] = "已用:";
 		translations["Load avg:"] = "负载:";
 		translations["License"] = "许可证";
 		translations["Rate:"] = "速率:";
@@ -884,6 +873,18 @@ namespace Locale {
 
 		translations["filter"] = "过滤";
 		translations[" del"] = " 清除";
+
+	//* 2026-10-25 补齐的漏译条目（对话框修饰/帮助页/配置说明/错误消息）
+	translations[" | To choose signal."] = " | 选择信号";
+	translations[" | Enter manually."] = " | 手动输入";
+	translations[" | To send signal."] = " | 发送信号";
+	translations[" | To change value."] = " | 调整数值";
+	translations[" | To change value by 5."] = " | 数值 ±5";
+	translations[" | To set nice value."] = " | 设定 nice 值";
+	translations["Config file can't be a directory"] = "配置文件不能是目录";
+
+	//* 2026-10-25 补齐的漏译条目（对话框修饰/帮助页/配置说明/错误消息）
+	translations["Prepend \\033[3mexclude=\\033[23m to only show disks "] = "在开头加 \\033[3mexclude=\\033[23m 可只显示磁盘 ";
 
 		current_lang = "zh";
 		return true;

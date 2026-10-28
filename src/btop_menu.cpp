@@ -1017,7 +1017,7 @@ namespace Menu {
 			x = Term::width/2 - 40;
 			y = Term::height/2 - 9;
 			bg = Draw::createBox(x + 2, y, 78, 19, Theme::c("hi_fg"), true, "signals");
-			bg += Mv::to(y+2, x+3) + Theme::c("title") + Fx::b + cjust("Send signal to PID " + to_string(s_pid.value()) + " ("
+			bg += Mv::to(y+2, x+3) + Theme::c("title") + Fx::b + cjust(Locale::get("Send signal to PID ") + to_string(s_pid.value()) + " ("
 				+ uresize((s_pid == Config::getI("detailed_pid") ? Proc::detailed.entry.name : Config::getS("selected_name")), 30) + ")", 76);
 		}
 		else if (is_in(key, "escape", "q")) {
@@ -1083,7 +1083,7 @@ namespace Menu {
 		if (retval == Changed) {
 			int cy = y+4, cx = x+4;
 			out = bg + Mv::to(cy++, x+3) + Theme::c("main_fg") + Fx::ub
-				+ rjust("Enter signal number: ", 48) + Theme::c("hi_fg") + (selected_signal >= 0 ? to_string(selected_signal) : "") + Theme::c("main_fg") + Fx::bl + "█" + Fx::ubl;
+				+ rjust(Locale::get("Enter signal number: "), 48, true) + Theme::c("hi_fg") + (selected_signal >= 0 ? to_string(selected_signal) : "") + Theme::c("main_fg") + Fx::bl + "█" + Fx::ubl;
 
 			auto sig_str = to_string(selected_signal);
 			for (int count = 0, i = 0; const auto& sig : P_Signals) {
@@ -1098,9 +1098,9 @@ namespace Menu {
 			}
 
 			cy++;
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "↑ ↓ ← →", 33, true) + Theme::c("main_fg") + Fx::ub + " | To choose signal.";
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("0-9", 33) + Theme::c("main_fg") + Fx::ub + " | Enter manually.";
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ENTER", 33) + Theme::c("main_fg") + Fx::ub + " | To send signal.";
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "↑ ↓ ← →", 33, true) + Theme::c("main_fg") + Fx::ub + Locale::get(" | To choose signal.");
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("0-9", 33) + Theme::c("main_fg") + Fx::ub + Locale::get(" | Enter manually.");
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ENTER", 33) + Theme::c("main_fg") + Fx::ub + Locale::get(" | To send signal.");
 			mouse_mappings["enter"] = {cy, x, 1, 73};
 			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ESC or \"q\"", 33) + Theme::c("main_fg") + Fx::ub + " | To abort.";
 			mouse_mappings["escape"] = {cy, x, 1, 73};
@@ -1119,8 +1119,8 @@ namespace Menu {
 		if (redraw) {
 			vector<string> cont_vec {
 				Fx::b + Theme::g("used")[100] + "Error:" + Theme::c("main_fg") + Fx::ub,
-				"Terminal size too small to" + Fx::reset,
-				"display menu or box!" + Fx::reset };
+				Locale::get("Terminal size too small to") + Fx::reset,
+				Locale::get("display menu or box!") + Fx::reset };
 
 			messageBox = Menu::msgBox{45, 0, cont_vec, "error"};
 			Global::overlay = messageBox();
@@ -1190,16 +1190,16 @@ namespace Menu {
 			vector<string> cont_vec;
 			cont_vec.push_back(Fx::b + Theme::g("used")[100] + "Failure:" + Theme::c("main_fg") + Fx::ub);
 			if (signalKillRet == EINVAL) {
-				cont_vec.push_back("Unsupported signal!" + Fx::reset);
+				cont_vec.push_back(Locale::get("Unsupported signal!") + Fx::reset);
 			}
 			else if (signalKillRet == EPERM) {
-				cont_vec.push_back("Insufficient permissions to send signal!" + Fx::reset);
+				cont_vec.push_back(Locale::get("Insufficient permissions to send signal!") + Fx::reset);
 			}
 			else if (signalKillRet == ESRCH) {
-				cont_vec.push_back("Process not found!" + Fx::reset);
+				cont_vec.push_back(Locale::get("Process not found!") + Fx::reset);
 			}
 			else {
-				cont_vec.push_back("Unknown error! (errno: " + to_string(signalKillRet) + ')' + Fx::reset);
+				cont_vec.push_back(Locale::get("Unknown error! (errno: ") + to_string(signalKillRet) + ')' + Fx::reset);
 			}
 
 			messageBox = Menu::msgBox{50, 0, cont_vec, "error"};
@@ -1816,7 +1816,7 @@ static int optionsMenu(const string& key) {
 			x = Term::width/2 - 25;
 			y = Term::height/2 - 6;
 			bg = Draw::createBox(x + 2, y, 50, 13, Theme::c("hi_fg"), true, "renice");
-			bg += Mv::to(y+2, x+3) + Theme::c("title") + Fx::b + cjust("Renice PID " + to_string(s_pid.value()) + " ("
+			bg += Mv::to(y+2, x+3) + Theme::c("title") + Fx::b + cjust(Locale::get("Renice PID ") + to_string(s_pid.value()) + " ("
 				+ uresize((s_pid == Config::getI("detailed_pid") ? Proc::detailed.entry.name : Config::getS("selected_name")), 15) + ")", 48);
 		}
 		else if (is_in(key, "escape", "q")) {
@@ -1871,13 +1871,13 @@ static int optionsMenu(const string& key) {
 				catch (...) { selected_nice = 0; }
 			}
 			out = bg + Mv::to(cy++, x+3) + Theme::c("main_fg") + Fx::ub
-				+ rjust("Enter nice value: ", 30) + Theme::c("hi_fg") + (nice_edit.empty() ? to_string(selected_nice) : nice_edit) + Theme::c("main_fg") + Fx::bl + "█" + Fx::ubl;
+				+ rjust(Locale::get("Enter nice value: "), 30, true) + Theme::c("hi_fg") + (nice_edit.empty() ? to_string(selected_nice) : nice_edit) + Theme::c("main_fg") + Fx::bl + "█" + Fx::ubl;
 
 			cy++;
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "↑ ↓", 20, true) + Theme::c("main_fg") + Fx::ub + " | To change value.";
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "← →", 20, true) + Theme::c("main_fg") + Fx::ub + " | To change value by 5.";
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("0-9", 20) + Theme::c("main_fg") + Fx::ub + " | Enter manually.";
-			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ENTER", 20) + Theme::c("main_fg") + Fx::ub + " | To set nice value.";
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "↑ ↓", 20, true) + Theme::c("main_fg") + Fx::ub + Locale::get(" | To change value.");
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust( "← →", 20, true) + Theme::c("main_fg") + Fx::ub + Locale::get(" | To change value by 5.");
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("0-9", 20) + Theme::c("main_fg") + Fx::ub + Locale::get(" | Enter manually.");
+			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ENTER", 20) + Theme::c("main_fg") + Fx::ub + Locale::get(" | To set nice value.");
 			out += Mv::to(++cy, x+3) + Fx::b + Theme::c("hi_fg") + rjust("ESC or 'q'", 20) + Theme::c("main_fg") + Fx::ub + " | To abort.";
 
 			out += Fx::reset;
